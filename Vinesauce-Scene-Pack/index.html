@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Vinesauce Scene Pack</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Atkinson+Hyperlegible:wght@400;700&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+/* Layout: a short title block, then three scene "cartridges" (screenshot, name, what it does, download),
+   then plain install steps. One deliberate dark look: these are VJ scenes, shown on black. */
+:root {
+  color-scheme: dark;
+  --bg: #0a0b10;
+  --panel: #12141c;
+  --panel-2: #191c27;
+  --line: #262b3a;
+  --fg: #e6e9f2;
+  --muted: #949bb0;
+  --green: #4fe07a;    /* Vinesauce green */
+  --red: #ff3448;      /* RedVox red */
+  --blue: #4a86ff;     /* the pigeon's neon rim */
+  --font-display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --font-body: "Atkinson Hyperlegible", "Segoe UI", system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, Consolas, monospace;
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; background: var(--bg); color: var(--fg); font-family: var(--font-body); font-size: 17px; line-height: 1.55; }
+.wrap { max-width: 1120px; margin: 0 auto; padding-inline: 20px; padding-block: 48px 64px; display: grid; gap: 56px; }
+a { color: var(--fg); }
+:focus-visible { outline: 2px solid var(--green); outline-offset: 3px; border-radius: 4px; }
+
+header { display: grid; gap: 14px; max-width: 760px; }
+.eyebrow { font: 500 13px var(--font-mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--green); }
+h1 { margin: 0; font-family: var(--font-display); font-weight: 800; font-size: clamp(40px, 7vw, 76px); line-height: 0.95; letter-spacing: -0.02em; text-wrap: balance; }
+h1 .spin { display: inline-block; color: var(--green); }
+@media (prefers-reduced-motion: no-preference) { h1 .spin { animation: speen 6s linear infinite; } }
+@keyframes speen { to { transform: rotate(360deg); } }
+.lede { margin: 0; color: var(--muted); font-size: 19px; max-width: 60ch; }
+
+.scenes { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 22px; }
+.scene { display: grid; grid-template-rows: auto 1fr; background: var(--panel); border: 1px solid var(--line); border-radius: 10px; overflow: hidden; min-width: 0; }
+.shot { position: relative; aspect-ratio: 16 / 9; max-width: 100%; background: #000; overflow: hidden; }
+.shot img { position: relative; z-index: 1; display: block; width: 100%; height: 100%; object-fit: cover; }
+.shot .stand-in { position: absolute; inset: 0; display: grid; place-items: center; background:
+  radial-gradient(circle at 50% 120%, rgba(255, 52, 72, 0.35), transparent 60%),
+  repeating-linear-gradient(90deg, transparent 0 47px, rgba(255, 52, 72, 0.18) 47px 48px),
+  repeating-linear-gradient(0deg, transparent 0 47px, rgba(255, 52, 72, 0.18) 47px 48px), #0d0507; }
+.shot .stand-in span { font: 800 34px var(--font-display); letter-spacing: 0.04em; color: var(--red); text-transform: uppercase; }
+.tag { position: absolute; left: 12px; top: 12px; font: 500 12px var(--font-mono); letter-spacing: 0.06em; text-transform: uppercase; padding: 3px 8px; border-radius: 4px; background: rgba(10, 11, 16, 0.78); color: var(--fg); }
+.body { display: grid; grid-template-rows: auto auto 1fr auto; gap: 12px; padding: 20px 20px 22px; }
+.body h2 { margin: 0; font: 800 26px/1.1 var(--font-display); letter-spacing: -0.01em; text-wrap: balance; }
+.body p { margin: 0; color: var(--muted); }
+.facts { display: flex; flex-wrap: wrap; gap: 6px; align-content: start; margin: 0; padding: 0; list-style: none; }
+.facts li { font: 500 12px var(--font-mono); color: var(--muted); border: 1px solid var(--line); border-radius: 4px; padding: 2px 7px; }
+.actions { display: flex; flex-wrap: wrap; gap: 10px; }
+.btn { display: inline-flex; align-items: center; gap: 8px; font: 700 15px var(--font-body); text-decoration: none; padding: 10px 14px; border-radius: 6px; border: 1px solid var(--line); background: var(--panel-2); color: var(--fg); }
+.btn:hover { border-color: var(--muted); }
+.btn.primary { background: var(--green); border-color: var(--green); color: #07130b; }
+.btn.primary:hover { filter: brightness(1.08); }
+.btn small { font: 500 12px var(--font-mono); opacity: 0.75; }
+.scene.pigeon .btn.play { border-color: var(--blue); }
+.scene.rat .btn.primary { background: var(--red); border-color: var(--red); color: #fff; }
+
+.guides { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 22px; }
+.guide { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 22px 22px 24px; display: grid; gap: 12px; align-content: start; min-width: 0; }
+.guide h2 { margin: 0; font: 800 24px/1.15 var(--font-display); }
+.guide ol, .guide ul { margin: 0; padding-left: 1.3em; display: grid; gap: 8px; }
+.guide li::marker { color: var(--green); font-weight: 700; }
+.guide p { margin: 0; color: var(--muted); }
+kbd, code { font: 500 14px var(--font-mono); background: var(--panel-2); border: 1px solid var(--line); border-radius: 4px; padding: 0 5px; color: var(--fg); }
+footer { color: var(--muted); font-size: 15px; border-top: 1px solid var(--line); padding-top: 20px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="eyebrow">Synesthesia scenes · by Panguin8281</div>
+    <h1>Vinesauce Scene Pack <span class="spin" aria-hidden="true">✺</span></h1>
+    <p class="lede">Three audio-reactive scenes made for Vinesauce and RedVox. Download them for Synesthesia, or try Pigeon Hole straight in your browser with no install.</p>
+  </header>
+
+  <section class="scenes" aria-label="Scenes">
+    <article class="scene pigeon">
+      <div class="shot">
+        <img src="img/pigeon-hole.png" alt="The textured pigeon in flight against a dark background" width="960" height="540">
+        <span class="tag">RedVox</span>
+      </div>
+      <div class="body">
+        <h2>Pigeon Hole — True Mesh</h2>
+        <p>The real pigeon model, traced triangle by triangle. Fly or walk poses, Neon, Realistic or Dove looks, and a corruption bank that melts, twists and shatters the actual bird.</p>
+        <ul class="facts"><li>50 controls</li><li>2 poses</li><li>3 looks</li></ul>
+        <div class="actions">
+          <a class="btn primary" href="downloads/Pigeon-Hole-True-Mesh.zip" download>Download for Synesthesia <small>1.3 MB</small></a>
+          <a class="btn play" href="play/pigeon-hole.html">Try it in your browser</a>
+        </div>
+      </div>
+    </article>
+
+    <article class="scene vineshroom">
+      <div class="shot">
+        <img src="img/vineshroom.png" alt="A ring of brightly patterned mushrooms over a tie-dye background" width="960" height="540">
+        <span class="tag">Vinesauce</span>
+      </div>
+      <div class="body">
+        <h2>Vineshroom SPEEN Circle</h2>
+        <p>A ring of spinning mushrooms that bounce to the music over a tie-dye background. Trails, glitch and low-poly controls, and you can put your own video behind it.</p>
+        <ul class="facts"><li>46 controls</li><li>SPEEN</li></ul>
+        <div class="actions">
+          <a class="btn primary" href="downloads/Vineshroom-SPEEN-Circle.zip" download>Download for Synesthesia <small>0.2 MB</small></a>
+        </div>
+      </div>
+    </article>
+
+    <article class="scene rat">
+      <div class="shot">
+        <img src="img/rat.png" alt="The RedVox rat" width="960" height="540" onerror="this.remove()">
+        <div class="stand-in" aria-hidden="true"><span>RedVox Rat</span></div>
+        <span class="tag">RedVox</span>
+      </div>
+      <div class="body">
+        <h2>RedVox Rat</h2>
+        <p>The RedVox rat, ray-traced from the real model, with a pizza slice in its mouth you can switch on. SPEEN tumble, camera presets, corruption, trails and low-poly.</p>
+        <ul class="facts"><li>56 controls</li><li>pizza toggle</li></ul>
+        <div class="actions">
+          <a class="btn primary" href="downloads/RedVox-Rat.zip" download>Download for Synesthesia <small>1.4 MB</small></a>
+        </div>
+      </div>
+    </article>
+  </section>
+
+  <section class="guides" aria-label="How to use them">
+    <div class="guide">
+      <h2>Add a scene to Synesthesia</h2>
+      <ol>
+        <li>Click <strong>Download for Synesthesia</strong> on the scene you want.</li>
+        <li>Unzip it. Inside is a folder whose name ends in <code>.synScene</code>. That folder is the scene.</li>
+        <li>Move that folder into the folder Synesthesia loads your own scenes from.</li>
+        <li>Open Synesthesia and find the scene in your library by its name.</li>
+      </ol>
+      <p>Click a control, then press <kbd>D</kbd> for default, <kbd>R</kbd> for random or <kbd>L</kbd> to lock it, same as any Synesthesia scene.</p>
+    </div>
+    <div class="guide">
+      <h2>Pigeon Hole in your browser</h2>
+      <ul>
+        <li>Use Chrome or Edge on a computer.</li>
+        <li>The first launch takes about 15 seconds while your graphics card gets the pigeon ready. After that it opens straight away.</li>
+        <li>For music: click <strong>Desktop audio</strong>, pick <strong>Entire screen</strong>, and turn on <strong>Also share system audio</strong>. Mic and audio files work too.</li>
+        <li>Left-drag to orbit, right-drag to zoom. <kbd>H</kbd> hides the controls, <kbd>F</kbd> goes fullscreen.</li>
+      </ul>
+    </div>
+  </section>
+
+  <footer>Made by Panguin8281 for Vinesauce and RedVox. This page is unlisted: only people with the link can find it.</footer>
+</div>
+</body>
+</html>
